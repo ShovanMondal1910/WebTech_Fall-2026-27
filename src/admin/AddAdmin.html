@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Admin</title>
+</head>
+<body>
+    <main class="add-admin-container">
+        <section class="add-admin-card">
+            <header class="add-admin-header">
+                <h2>Add Admin</h2>
+                <p>Please enter the details of the new admin.</p>
+            </header>
+
+            <form action="" method="post" id="addAdminForm" class="add-admin-form" novalidate>
+                <!-- Name Input -->
+                 <div class="input-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" placeholder="e.g., John Doe" required autocomplete="name">
+                    <span class="error-message" id="nameError" aria-live="polite"></span>
+                 </div>
+
+                 <!-- Email Input -->
+                 <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="e.g., name@gmail.com" required autocomplete="email">
+                    <span class="error-message" id="emailError" aria-live="polite"></span>
+                 </div>
+
+                 <!-- Phone Number Input -->
+                 <div class="input-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="e.g., 123-456-7890" required autocomplete="tel">
+                    <span class="error-message" id="phoneError" aria-live="polite"></span>
+                 </div>
+
+                 <!-- Password Input -->
+                 <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="********" required autocomplete="new-password">
+                    <span class="error-message" id="passwordError" aria-live="polite"></span>
+                 </div>
+
+                 <!-- Confirm Password Input -->
+                 <div class="input-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirm-password" placeholder="********" required autocomplete="new-password">
+                    <span class="error-message" id="confirm-passwordError" aria-live="polite"></span>
+                 </div>
+
+                 <!-- Address Line Input -->
+                 <div class="input-group">
+                    <label for="address">Address</label>
+                    <textarea id="address" name="address" rows="4" placeholder="e.g., 123 Main St" required autocomplete="street-address"></textarea>
+                    <span class="error-message" id="addressError" aria-live="polite"></span>
+                 </div>
+                 
+                 <!-- Role -->
+                  <div class="input-group">
+                    <label for="role">Role</label>
+                    <select id="role" name="role" required>
+                      <option value="">Select Role</option>
+                      <option value="super-admin">Super Admin</option>
+                      <option value="product-admin">Product Admin</option>
+                      <option value="order-management-admin">Order Management Admin</option>
+                      <option value="support-admin">Support Admin</option>
+                      <option value="inventory-admin">Inventory Admin</option>
+                      <option value="sales-admin">Sales Admin</option>
+                      <option value="marketing-admin">Marketing Admin</option>
+                      <option value="hr-admin">HR Admin</option>
+                      <option value="finance-admin">Finance Admin</option>
+                      <option value="security-admin">Security Admin</option>
+                    </select>
+                    <span class="error-message" id="roleError" aria-live="polite"></span>
+                  </div>
+
+                  <!-- Status -->
+                  <div class="input-group">
+                    <label>Status</label>
+                    <div class="radio-group">
+                      <label class="radio-label"><input type="radio" name="status" value="active" required>Active</label>
+                      <label class="radio-label"><input type="radio" name="status" value="inactive" required>Inactive</label>
+                    </div>
+                    <span class="error-message" id="statusError" aria-live="polite"></span>
+                  </div>
+                  
+                 <button type="submit" class="btn-submit">Add Admin</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
