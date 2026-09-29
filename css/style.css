@@ -168,3 +168,129 @@ body {
 .login-footer a:hover {
     text-decoration: underline;
 }
+
+
+
+
+/* Signup Container */
+.signup-container {
+    width: 100%;
+    max-width: 420px;
+    padding: 20px;
+}
+
+.signup-card {
+    background: #ffffff;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.09);
+}
+
+.signup-header h2 {
+    color: #1f2937;
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.signup-header p {
+    color: #6b7280;
+    font-size: 14px;
+    margin-bottom: 24px;
+}
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* Terms and Conditions */
+
+.terms-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #4b5563;
+    cursor: pointer;
+    user-select: none;
+}
+
+.terms-label input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    accent-color: #1f2937;
+    cursor: pointer;
+}
+
+/* Signup Footer */
+
+.signup-footer {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.signup-footer a {
+    color: #1f2937;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.signup-footer a:hover {
+    text-decoration: underline;
+}
+
+
+
+/* Forgot Password */
+
+.forgot-container {
+    width: 100%;
+    max-width: 420px;
+    padding: 20px;
+}
+
+.forgot-card {
+    background: #ffffff;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.09);
+}
+
+.forgot-header h2 {
+    color: #1f2937;
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.forgot-header p {
+    color: #6b7280;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 24px;
+}
+
+.forgot-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.forgot-footer {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.forgot-footer a {
+    color: #1f2937;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.forgot-footer a:hover {
+    text-decoration: underline;
+}
