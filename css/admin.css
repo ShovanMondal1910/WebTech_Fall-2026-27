@@ -1,0 +1,167 @@
+/*Reset & Base*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+body {
+    background-color: #f3f4f6;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+/* Add Admin — Container & Card */
+.add-admin-container {
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+.add-admin-card {
+    background: #ffffff;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.09);
+}
+
+/* Header */
+.add-admin-header {
+    margin-bottom: 28px;
+}
+
+.add-admin-header h2 {
+    color: #1f2937;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.add-admin-header p {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+/* Form Layout */
+.add-admin-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* Input Group & Labels */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.input-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+}
+
+/* Inputs, Textarea & Select */
+.input-group input,
+.input-group textarea,
+.input-group select {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 14px;
+    font-family: inherit;
+    color: #1f2937;
+    background-color: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-group input::placeholder,
+.input-group textarea::placeholder {
+    color: #9ca3af;
+}
+
+.input-group input:focus,
+.input-group textarea:focus,
+.input-group select:focus {
+    border-color: #1f2937;
+    box-shadow: 0 0 0 3px rgba(31, 41, 55, 0.08);
+}
+
+.input-group textarea {
+    resize: vertical;
+    min-height: 90px;
+}
+
+.input-group select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 36px;
+    cursor: pointer;
+}
+
+/* Radio Group (Status)*/
+.radio-group {
+    display: flex;
+    gap: 20px;
+    padding: 4px 0;
+}
+
+.radio-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #4b5563;
+    cursor: pointer;
+    user-select: none;
+}
+
+.radio-label input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #1f2937;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+/* Validation Feedback */
+.error-message {
+    font-size: 12px;
+    color: #dc2626;
+    min-height: 16px;
+}
+
+/* Submit Button */
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    background-color: #1f2937;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: inherit;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 6px;
+    transition: background-color 0.2s ease, transform 0.05s ease;
+}
+
+.btn-submit:hover {
+    background-color: #111827;
+}
+
+.btn-submit:active {
+    transform: scale(0.99);
+}
