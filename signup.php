@@ -38,17 +38,10 @@
                     <span class="error-message" id="passwordError" aria-live="polite"></span>
                 </div>
 
-                <!-- Confirm Password -->
-                <div class="input-group">
-                    <label for="confirmPassword">Confirm Password</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required autocomplete="new-password" >
-                    <span class="error-message" id="confirmPasswordError" aria-live="polite"></span>
-                </div>
-
                 <!-- Terms -->
                 <label class="terms-label" for="terms">
                     <input type="checkbox" id="terms" name="terms" required>
-                    <span>I agree to the <a href="" style="text-decoration: none;">terms and conditions.</a></span>
+                    <span>I agree to the <a href="">terms and conditions.</a></span>
                 </label>
 
                 <!-- Submit -->
