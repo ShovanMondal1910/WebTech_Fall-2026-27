@@ -1,7 +1,4 @@
-/* ==========================================================================
-   Patient Identity & Management Stylesheet
-   Designed to match project aesthetics (admin.css & style.css)
-   ========================================================================== */
+/* Patient Identity & Management Stylesheet */
 
 * {
     margin: 0;
@@ -28,6 +25,18 @@ body {
     display: flex;
     flex-direction: column;
     gap: 24px;
+}
+
+/* Accessibility */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
 }
 
 /* Search Card */
@@ -198,7 +207,7 @@ fieldset {
 }
 
 legend {
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 700;
     color: #1f2937;
     padding: 0 10px;
@@ -224,12 +233,12 @@ legend {
 }
 
 .input-group label {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 600;
     color: #374151;
 }
 
-.input-group input,
+.input-group input:not([type="radio"]):not([type="checkbox"]),
 .input-group textarea,
 .input-group select {
     width: 100%;
@@ -244,12 +253,12 @@ legend {
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.input-group input::placeholder,
+.input-group input:not([type="radio"]):not([type="checkbox"])::placeholder,
 .input-group textarea::placeholder {
     color: #9ca3af;
 }
 
-.input-group input:focus,
+.input-group input:not([type="radio"]):not([type="checkbox"]):focus,
 .input-group textarea:focus,
 .input-group select:focus {
     border-color: #1f2937;
@@ -260,6 +269,129 @@ legend {
     resize: vertical;
     min-height: 80px;
 }
+
+/* Radio Group & Radio Labels */
+/* Radio & Checkbox Groups */
+.radio-group,
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px 20px;
+    padding: 4px 0 6px;
+}
+
+.radio-label,
+.checkbox-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #4b5563;
+    cursor: pointer;
+    user-select: none;
+}
+
+.radio-label input[type="radio"],
+.checkbox-label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    accent-color: #1f2937;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+/* Vaccination Section Organization */
+.vax-quick-status {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 10px 14px;
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    margin-top: 4px;
+    margin-bottom: 8px;
+}
+
+.vax-quick-status .checkbox-label {
+    background: #ffffff;
+    padding: 7px 14px;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+    font-weight: 600;
+    color: #1f2937;
+    transition: all 0.15s ease;
+}
+
+.vax-quick-status .checkbox-label:hover {
+    border-color: #9ca3af;
+    background: #f9fafb;
+}
+
+.vax-categories-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin-bottom: 10px;
+}
+
+.vax-category-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.vax-category-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #4b5563;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f3f4f6;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.vax-category-title svg {
+    color: #4b5563;
+    flex-shrink: 0;
+}
+
+.vax-options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.vax-options-grid .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    background: #f9fafb;
+    border: 1px solid #f3f4f6;
+    font-size: 13px;
+    color: #374151;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.vax-options-grid .checkbox-label:hover {
+    background: #f3f4f6;
+    border-color: #e5e7eb;
+    color: #111827;
+}
+
 
 /* Select Styling */
 .input-group select {

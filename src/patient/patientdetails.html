@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Patient Identity and Comprehensive Medical Profile Management System">
+    <title>Patient Identity Management</title>
+    <link rel="stylesheet" href="../../css/patient.css">
+</head>
+<body>
+
+    <!-- Main Container -->
+    <main class="patient-container">
+
+        
+        <!-- SEARCH & VERIFICATION CARD Allows looking up registered patients by email address -->
+        <section class="search-card" aria-labelledby="searchHeading">
+            <header class="search-header">
+                <h2 id="searchHeading">Connect & Find Patient</h2>
+                <p>Lookup registered patients by email address to verify identity.</p>
+            </header>
+
+            <!-- Search Form -->
+            <form id="patientSearchForm" class="searched-items-card" novalidate>
+                <div class="search-input-wrapper">
+                    <label for="searchPatientEmail" class="visually-hidden">Registered Patient Email</label>
+                    <input type="email" id="searchPatientEmail" name="search_email" placeholder="Enter registered patient's email address" required autocomplete="email">
+                    <span class="error-message" id="searchError" aria-live="polite"></span>
+                </div>
+                <button type="submit" class="btn-search">Search Patient</button>
+            </form>
+
+            <!-- Quick Data Display Preview -->
+            <div class="patient-data-card" id="patientQuickSummary" aria-live="polite">
+                <div class="data-item">
+                    <span class="data-label">Patient Name</span>
+                    <span class="data-value" id="displayPatientName">—</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">Email Address</span>
+                    <span class="data-value" id="displayPatientEmail">—</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">Status</span>
+                    <span class="data-value">
+                        <span class="status-badge status-empty" id="displayPatientStatus">Not Selected</span>
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- PATIENT IDENTITY & MEDICAL PROFILE FORM Collects personal, emergency, and clinical records -->
+        <section class="patient-form-card" aria-labelledby="formHeading">
+            <header class="form-header">
+                <h1 id="formHeading">Patient Identity Information</h1>
+                <p>Please fill out personal details, emergency contacts, and medical profile accurately.</p>
+            </header>
+
+            <form action="" method="POST" id="patientIdentityForm" enctype="multipart/form-data" novalidate>
+                <!-- Hidden Linkage for Verified Patient Account -->
+                <input type="hidden" id="selectedPatientEmail" name="selected_patient_email" value="">
+
+                <!-- SECTION 1: PERSONAL INFORMATION   -->
+                <fieldset>
+                    <legend>Personal Information</legend>
+                    <div class="form-grid">
+
+                        <!-- Patient ID with Auto-Generate Action -->
+                        <div class="input-group col-span-2">
+                            <label for="patient_id">Patient ID / NID / Passport</label>
+                            <div class="input-action-wrapper">
+                                <input type="text" id="patient_id" name="patient_id" placeholder="Generate ID or enter NID / Passport number" required autocomplete="off">
+                                <button type="button" class="btn-secondary" id="btnGenerateId">Generate ID</button>
+                            </div>
+                            <span class="error-message" id="patientIdError" aria-live="polite"></span>
+                        </div>
+
+                        <!-- Phone Number -->
+                        <div class="input-group">
+                            <label for="patient_phone">Phone Number</label>
+                            <input type="tel" id="patient_phone" name="patient_phone" placeholder="e.g. +880 1712-345678" required autocomplete="tel">
+                            <span class="error-message" id="phoneError" aria-live="polite"></span>
+                        </div>
+
+                        <!-- Blood Group -->
+                        <div class="input-group">
+                            <label for="blood_group">Blood Group</label>
+                            <select id="blood_group" name="blood_group" required>
+                                <option value="" disabled selected>Select Blood Group</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                            </select>
+                            <span class="error-message" id="bloodGroupError" aria-live="polite"></span>
+                        </div>
+
+                        <!-- Patient Photo Upload with Live Preview -->
+                        <div class="input-group col-span-2">
+                            <label for="patient_image">Patient Photo</label>
+                            <div class="file-upload-wrapper">
+                                <div class="image-preview" id="imagePreviewBox">
+                                    <img src="" alt="Patient Preview" id="previewImg">
+                                    <span id="previewPlaceholder">No Photo</span>
+                                </div>
+                                <div class="file-input-control">
+                                    <input type="file" id="patient_image" name="patient_image" accept="image/*">
+                                </div>
+                            </div>
+                            <span class="error-message" id="imageError" aria-live="polite"></span>
+                        </div>
+
+                        <!-- Residential Address -->
+                        <div class="input-group col-span-2">
+                            <label for="patient_address">Residential Address</label>
+                            <textarea id="patient_address" name="patient_address" rows="3" placeholder="Enter current residential address" required></textarea>
+                            <span class="error-message" id="addressError" aria-live="polite"></span>
+                        </div>
+
+                    </div>
+                </fieldset>
+
+                <!--  SECTION 2: EMERGENCY & GUARDIAN CONTACT -->
+                <fieldset>
+                    <legend>Emergency & Guardian Contact</legend>
+                    <div class="form-grid">
+
+                        <!-- Emergency Contact Name -->
+                        <div class="input-group">
+                            <label for="emergency_name">Contact Person Name</label>
+                            <input type="text" id="emergency_name" name="emergency_name" placeholder="Enter guardian or relative name" required autocomplete="name">
+                            <span class="error-message" id="emergencyNameError" aria-live="polite"></span>
+                        </div>
+
+                        <!-- Emergency Relation -->
+                        <div class="input-group">
+                            <label for="emergency_relation">Relation with Patient</label>
+                            <select id="emergency_relation" name="emergency_relation" required>
+                                <option value="" disabled selected>Select Relation</option>
+                                <option value="father">Father</option>
+                                <option value="mother">Mother</option>
+                                <option value="wife">Wife</option>
+                                <option value="husband">Husband</option>
+                                <option value="son">Son</option>
+                                <option value="daughter">Daughter</option>
+                                <option value="brother">Brother</option>
+                                <option value="sister">Sister</option>
+                                <option value="others">Others (Guardian / Relative)</option>
+                            </select>
+                            <span class="error-message" id="emergencyRelationError" aria-live="polite"></span>
+                        </div>
+
+                        <!-- Emergency Phone -->
+                        <div class="input-group col-span-2">
+                            <label for="emergency_phone">Emergency Phone Number</label>
+                            <input type="tel" id="emergency_phone" name="emergency_phone" placeholder="Enter emergency contact phone number" required autocomplete="tel">
+                            <span class="error-message" id="emergencyPhoneError" aria-live="polite"></span>
+                        </div>
+
+                        <!-- Emergency Address -->
+                        <div class="input-group col-span-2">
+                            <label for="emergency_address">Emergency Contact Address</label>
+                            <textarea id="emergency_address" name="emergency_address" rows="3" placeholder="Enter guardian or relative address" required></textarea>
+                            <span class="error-message" id="emergencyAddressError" aria-live="polite"></span>
+                        </div>
+
+                    </div>
+                </fieldset>
+
+                <!-- SECTION 3: MEDICAL PROFILE -->
+                <fieldset>
+                    <legend>Medical Profile</legend>
+                    <div class="form-grid">
+
+                        <!-- 3.1 Allergic To -->
+                        <div class="input-group col-span-2" role="group" aria-labelledby="labelAllergy">
+                            <label id="labelAllergy">Allergic To</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label" for="allergy_none">
+                                    <input type="checkbox" id="allergy_none" name="allergy[]" value="None">
+                                    No Known Allergies
+                                </label>
+                                <label class="checkbox-label" for="allergy_food">
+                                    <input type="checkbox" id="allergy_food" name="allergy[]" value="Food">
+                                    Food
+                                </label>
+                                <label class="checkbox-label" for="allergy_drug">
+                                    <input type="checkbox" id="allergy_drug" name="allergy[]" value="Drug">
+                                    Drug / Medication
+                                </label>
+                                <label class="checkbox-label" for="allergy_environmental">
+                                    <input type="checkbox" id="allergy_environmental" name="allergy[]" value="Environmental">
+                                    Environmental
+                                </label>
+                                <label class="checkbox-label" for="allergy_insect">
+                                    <input type="checkbox" id="allergy_insect" name="allergy[]" value="Insect">
+                                    Insect Sting
+                                </label>
+                                <label class="checkbox-label" for="allergy_latex">
+                                    <input type="checkbox" id="allergy_latex" name="allergy[]" value="Latex">
+                                    Latex / Contact
+                                </label>
+                                <label class="checkbox-label" for="allergy_others">
+                                    <input type="checkbox" id="allergy_others" name="allergy[]" value="Others">
+                                    Others
+                                </label>
+                            </div>
+                            <textarea id="allergy_details" name="allergy_details" rows="2" placeholder="Specify allergy triggers or reaction details (if any)"></textarea>
+                            <span class="error-message" id="allergyError" aria-live="polite"></span>
+                        </div>
+
+                        <!-- 3.2 Chronic Conditions -->
+                        <div class="input-group col-span-2" role="group" aria-labelledby="labelChronic">
+                            <label id="labelChronic">Chronic Conditions</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label" for="chronic_none">
+                                    <input type="checkbox" id="chronic_none" name="chronic_conditions[]" value="None">
+                                    None
+                                </label>
+                                <label class="checkbox-label" for="chronic_diabetes">
+                                    <input type="checkbox" id="chronic_diabetes" name="chronic_conditions[]" value="Diabetes">
+                                    Diabetes
+                                </label>
+                                <label class="checkbox-label" for="chronic_hypertension">
+                                    <input type="checkbox" id="chronic_hypertension" name="chronic_conditions[]" value="Hypertension">
+                                    Hypertension
+                                </label>
+                                <label class="checkbox-label" for="chronic_asthma">
+                                    <input type="checkbox" id="chronic_asthma" name="chronic_conditions[]" value="Asthma">
+                                    Asthma
+                                </label>
+                                <label class="checkbox-label" for="chronic_heart">
+                                    <input type="checkbox" id="chronic_heart" name="chronic_conditions[]" value="Heart Disease">
+                                    Heart Disease
+                                </label>
+                                <label class="checkbox-label" for="chronic_kidney">
+                                    <input type="checkbox" id="chronic_kidney" name="chronic_conditions[]" value="Kidney Disease">
+                                    Kidney Disease
+                                </label>
+                                <label class="checkbox-label" for="chronic_others">
+                                    <input type="checkbox" id="chronic_others" name="chronic_conditions[]" value="Others">
+                                    Others
+                                </label>
+                            </div>
+                            <textarea id="chronic_conditions_details" name="chronic_conditions_details" rows="2" placeholder="Specify other chronic conditions or notes (if any)"></textarea>
+                            <span class="error-message" id="chronicConditionsError" aria-live="polite"></span>
+                        </div>
+
+                        <!-- 3.3 Past Illnesses -->
+                        <div class="input-group col-span-2" role="group" aria-labelledby="labelPastIllness">
+                            <label id="labelPastIllness">Past Illnesses</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label" for="past_none">
+                                    <input type="checkbox" id="past_none" name="past_illness[]" value="None">
+                                    None
+                                </label>
+                                <label class="checkbox-label" for="past_jaundice">
+                                    <input type="checkbox" id="past_jaundice" name="past_illness[]" value="Jaundice/Hepatitis">
+                                    Jaundice / Hepatitis
+                                </label>
+                                <label class="checkbox-label" for="past_tb">
+                                    <input type="checkbox" id="past_tb" name="past_illness[]" value="Tuberculosis">
+                                    Tuberculosis (TB)
+                                </label>
+                                <label class="checkbox-label" for="past_typhoid">
+                                    <input type="checkbox" id="past_typhoid" name="past_illness[]" value="Typhoid">
+                                    Typhoid
+                                </label>
+                                <label class="checkbox-label" for="past_pneumonia">
+                                    <input type="checkbox" id="past_pneumonia" name="past_illness[]" value="Pneumonia">
+                                    Pneumonia
+                                </label>
+                                <label class="checkbox-label" for="past_dengue">
+                                    <input type="checkbox" id="past_dengue" name="past_illness[]" value="Dengue/Malaria">
+                                    Dengue / Malaria
+                                </label>
+                                <label class="checkbox-label" for="past_covid">
+                                    <input type="checkbox" id="past_covid" name="past_illness[]" value="COVID-19">
+                                    COVID-19
+                                </label>
+                                <label class="checkbox-label" for="past_others">
+                                    <input type="checkbox" id="past_others" name="past_illness[]" value="Others">
+                                    Others
+                                </label>
+                            </div>
+                            <textarea id="past_illness_details" name="past_illness_details" rows="2" placeholder="Describe past illnesses in detail (illness name, year/duration, treatment, or lingering complications)"></textarea>
+                            <span class="error-message" id="pastIllnessError" aria-live="polite"></span>
+                        </div>
+
+                        <!-- 3.4 Past Surgeries and Hospitalizations -->
+                        <div class="input-group col-span-2" role="group" aria-labelledby="labelSurgeries">
+                            <label id="labelSurgeries">Past Surgeries & Hospitalizations</label>
+                            <div class="radio-group">
+                                <label class="radio-label" for="surgeries_no">
+                                    <input type="radio" id="surgeries_no" name="past_surgeries" value="No" checked>
+                                    No
+                                </label>
+                                <label class="radio-label" for="surgeries_yes">
+                                    <input type="radio" id="surgeries_yes" name="past_surgeries" value="Yes">
+                                    Yes
+                                </label>
+                            </div>
+                            <textarea id="past_surgeries_details" name="past_surgeries_details" rows="2" placeholder="Specify past surgeries, procedures, or hospitalizations (procedure name, hospital, year)"></textarea>
+                            <span class="error-message" id="surgeriesError" aria-live="polite"></span>
+                        </div>
+
+                        <!-- 3.5 Family Medical History -->
+                        <div class="input-group col-span-2" role="group" aria-labelledby="labelFamilyHistory">
+                            <label id="labelFamilyHistory">Family Medical History</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label" for="fam_none">
+                                    <input type="checkbox" id="fam_none" name="family_history[]" value="None">
+                                    None / Unknown
+                                </label>
+                                <label class="checkbox-label" for="fam_heart">
+                                    <input type="checkbox" id="fam_heart" name="family_history[]" value="Heart Disease">
+                                    Heart Disease
+                                </label>
+                                <label class="checkbox-label" for="fam_hypertension">
+                                    <input type="checkbox" id="fam_hypertension" name="family_history[]" value="Hypertension">
+                                    Hypertension
+                                </label>
+                                <label class="checkbox-label" for="fam_diabetes">
+                                    <input type="checkbox" id="fam_diabetes" name="family_history[]" value="Diabetes">
+                                    Diabetes
+                                </label>
+                                <label class="checkbox-label" for="fam_cancer">
+                                    <input type="checkbox" id="fam_cancer" name="family_history[]" value="Cancer">
+                                    Cancer
+                                </label>
+                                <label class="checkbox-label" for="fam_stroke">
+                                    <input type="checkbox" id="fam_stroke" name="family_history[]" value="Stroke">
+                                    Stroke
+                                </label>
+                                <label class="checkbox-label" for="fam_asthma">
+                                    <input type="checkbox" id="fam_asthma" name="family_history[]" value="Asthma">
+                                    Asthma
+                                </label>
+                                <label class="checkbox-label" for="fam_others">
+                                    <input type="checkbox" id="fam_others" name="family_history[]" value="Others">
+                                    Others
+                                </label>
+                            </div>
+                            <textarea id="family_history_details" name="family_history_details" rows="2" placeholder="Specify condition and relative (e.g. Father: Diabetes, Mother: Hypertension)"></textarea>
+                            <span class="error-message" id="familyHistoryError" aria-live="polite"></span>
+                        </div>
+
+                        <!-- 3.6 Current Medications -->
+                        <div class="input-group col-span-2" role="group" aria-labelledby="labelMedications">
+                            <label id="labelMedications">Current Medications</label>
+                            <div class="radio-group">
+                                <label class="radio-label" for="meds_no">
+                                    <input type="radio" id="meds_no" name="taking_medication" value="No" checked>
+                                    No
+                                </label>
+                                <label class="radio-label" for="meds_yes">
+                                    <input type="radio" id="meds_yes" name="taking_medication" value="Yes">
+                                    Yes
+                                </label>
+                            </div>
+                            <textarea id="current_medication_details" name="current_medication_details" rows="2" placeholder="List medications with dosage & frequency (e.g., Metformin 500mg - Twice daily, Aspirin 75mg - Once daily)"></textarea>
+                            <span class="error-message" id="currentMedicationError" aria-live="polite"></span>
+                        </div>
+
+                        <!-- 3.7 Vaccination History -->
+                        <div class="input-group col-span-2" role="group" aria-labelledby="labelVaccination">
+                            <label id="labelVaccination">Vaccination History</label>
+
+                            <!-- Quick Overall Status Bar -->
+                            <div class="vax-quick-status">
+                                <label class="checkbox-label" for="vax_none">
+                                    <input type="checkbox" id="vax_none" name="vaccinations[]" value="None">
+                                    None / Not Vaccinated
+                                </label>
+                                <label class="checkbox-label" for="vax_up_to_date">
+                                    <input type="checkbox" id="vax_up_to_date" name="vaccinations[]" value="Routine Childhood Complete">
+                                    Routine Childhood Complete (EPI)
+                                </label>
+                            </div>
+
+                            <!-- Categorized Vaccination Cards -->
+                            <div class="vax-categories-container">
+
+                                <!-- Routine & Childhood -->
+                                <div class="vax-category-card">
+                                    <h3 class="vax-category-title">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                                        Routine Childhood (EPI)
+                                    </h3>
+                                    <div class="vax-options-grid">
+                                        <label class="checkbox-label" for="vax_bcg">
+                                            <input type="checkbox" id="vax_bcg" name="vaccinations[]" value="BCG">
+                                            BCG (Tuberculosis)
+                                        </label>
+                                        <label class="checkbox-label" for="vax_polio">
+                                            <input type="checkbox" id="vax_polio" name="vaccinations[]" value="Polio">
+                                            Polio (OPV / IPV)
+                                        </label>
+                                        <label class="checkbox-label" for="vax_mmr">
+                                            <input type="checkbox" id="vax_mmr" name="vaccinations[]" value="MMR">
+                                            MMR (Measles, Mumps)
+                                        </label>
+                                        <label class="checkbox-label" for="vax_tetanus">
+                                            <input type="checkbox" id="vax_tetanus" name="vaccinations[]" value="Tetanus">
+                                            Tetanus / Tdap
+                                        </label>
+                                        <label class="checkbox-label" for="vax_pcv">
+                                            <input type="checkbox" id="vax_pcv" name="vaccinations[]" value="Pneumococcal">
+                                            Pneumococcal (PCV)
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Adult & Infectious Diseases -->
+                                <div class="vax-category-card">
+                                    <h3 class="vax-category-title">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>
+                                        Adult & Infectious
+                                    </h3>
+                                    <div class="vax-options-grid">
+                                        <label class="checkbox-label" for="vax_covid">
+                                            <input type="checkbox" id="vax_covid" name="vaccinations[]" value="COVID-19">
+                                            COVID-19
+                                        </label>
+                                        <label class="checkbox-label" for="vax_flu">
+                                            <input type="checkbox" id="vax_flu" name="vaccinations[]" value="Influenza">
+                                            Influenza (Flu Shot)
+                                        </label>
+                                        <label class="checkbox-label" for="vax_hepb">
+                                            <input type="checkbox" id="vax_hepb" name="vaccinations[]" value="Hepatitis B">
+                                            Hepatitis B
+                                        </label>
+                                        <label class="checkbox-label" for="vax_hepa">
+                                            <input type="checkbox" id="vax_hepa" name="vaccinations[]" value="Hepatitis A">
+                                            Hepatitis A
+                                        </label>
+                                        <label class="checkbox-label" for="vax_typhoid">
+                                            <input type="checkbox" id="vax_typhoid" name="vaccinations[]" value="Typhoid">
+                                            Typhoid
+                                        </label>
+                                        <label class="checkbox-label" for="vax_cholera">
+                                            <input type="checkbox" id="vax_cholera" name="vaccinations[]" value="Cholera">
+                                            Cholera
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Specialized & Travel -->
+                                <div class="vax-category-card">
+                                    <h3 class="vax-category-title">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+                                        Specialized & Travel
+                                    </h3>
+                                    <div class="vax-options-grid">
+                                        <label class="checkbox-label" for="vax_hpv">
+                                            <input type="checkbox" id="vax_hpv" name="vaccinations[]" value="HPV">
+                                            HPV
+                                        </label>
+                                        <label class="checkbox-label" for="vax_rabies">
+                                            <input type="checkbox" id="vax_rabies" name="vaccinations[]" value="Rabies">
+                                            Rabies
+                                        </label>
+                                        <label class="checkbox-label" for="vax_varicella">
+                                            <input type="checkbox" id="vax_varicella" name="vaccinations[]" value="Varicella">
+                                            Varicella (Chickenpox)
+                                        </label>
+                                        <label class="checkbox-label" for="vax_meningococcal">
+                                            <input type="checkbox" id="vax_meningococcal" name="vaccinations[]" value="Meningococcal">
+                                            Meningococcal
+                                        </label>
+                                        <label class="checkbox-label" for="vax_travel">
+                                            <input type="checkbox" id="vax_travel" name="vaccinations[]" value="Travel Vaccines">
+                                            Yellow Fever / Travel
+                                        </label>
+                                        <label class="checkbox-label" for="vax_others">
+                                            <input type="checkbox" id="vax_others" name="vaccinations[]" value="Others">
+                                            Others
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Vaccination Specifics / Booster Notes -->
+                            <textarea id="vaccination_details" name="vaccination_details" rows="2" placeholder="List specific doses, dates, booster records, or other vaccines received"></textarea>
+                            <span class="error-message" id="vaccinationError" aria-live="polite"></span>
+                        </div>
+
+                    </div>
+                </fieldset>
+
+                <!-- FORM ACTION BUTTONS -->
+                <div class="form-actions">
+                    <button type="reset" class="btn-reset">Reset</button>
+                    <button type="submit" class="btn-submit">Save Patient Information</button>
+                </div>
+
+            </form>
+        </section>
+
+    </main>
+</body>
+</html>
