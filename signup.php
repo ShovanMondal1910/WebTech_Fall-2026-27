@@ -1,3 +1,8 @@
+<?php
+$error    = $_GET['error'] ?? '';
+$oldName  = htmlspecialchars($_GET['name']  ?? '', ENT_QUOTES);
+$oldEmail = htmlspecialchars($_GET['email'] ?? '', ENT_QUOTES);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,19 +20,23 @@
                 <p>Please enter your details to create an account.</p>
             </header>
 
-            <form action="/signup-endpoint" method="POST" id="signupForm" class="signup-form" novalidate>
+            <?php if ($error !== ''): ?>
+                <div class="alert alert-error" role="alert"><?= htmlspecialchars($error) ?></div>
+            <?php endif; ?>
+
+            <form action="src/controllers/patient_registration.php" method="POST" id="signupForm" class="signup-form" novalidate>
 
                 <!-- Full Name -->
                 <div class="input-group">
                     <label for="name">Full Name</label>
-                    <input type="text" id="name" name="name" placeholder="Enter your full name" required autocomplete="name">
+                    <input type="text" id="name" name="name" placeholder="Enter your full name" value="<?= $oldName ?>" required autocomplete="name">
                     <span class="error-message" id="nameError" aria-live="polite"></span>
                 </div>
 
                 <!-- Email -->
                 <div class="input-group">
                     <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" placeholder="e.g., name@gmail.com" required autocomplete="email">
+                    <input type="email" id="email" name="email" placeholder="e.g., name@gmail.com" value="<?= $oldEmail ?>" required autocomplete="email">
                     <span class="error-message" id="emailError" aria-live="polite"></span>
                 </div>
 
@@ -45,9 +54,7 @@
                 </label>
 
                 <!-- Submit -->
-                <button type="submit" class="btn-submit">
-                    Create Account
-                </button>
+                <input type="submit" class="btn-submit" id="registerBtn" name="register" value="Create Account">
 
             </form>
 

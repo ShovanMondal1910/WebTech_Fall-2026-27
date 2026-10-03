@@ -92,6 +92,28 @@ body {
     min-height: 16px;
 }
 
+/* Alert Banners (server messages) */
+.alert {
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    line-height: 1.4;
+    margin-bottom: 18px;
+    border: 1px solid transparent;
+}
+
+.alert-error {
+    background-color: #fef2f2;
+    border-color: #fecaca;
+    color: #b91c1c;
+}
+
+.alert-success {
+    background-color: #f0fdf4;
+    border-color: #bbf7d0;
+    color: #15803d;
+}
+
 /* Checkbox & Forgot Password Row */
 .form-actions {
     display: flex;

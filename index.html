@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sign In</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -13,6 +13,8 @@
                 <h2>Welcome Back</h2>
                 <p>Please enter your details to sign in.</p>
             </header>
+
+            <div class="alert alert-success" id="registerSuccess" role="status" hidden></div>
 
             <form action="/login-endpoint" method="POST" id="loginForm" class="login-form" novalidate>
                 
@@ -46,10 +48,20 @@
 
             <!-- Registration Footer -->
             <footer class="login-footer">
-                <p>Don't have an account? <a href="signup.html">Create an account</a></p>
+                <p>Don't have an account? <a href="signup.php">Create an account</a></p>
             </footer>
         </section>
     </main>
 
+    <script>
+        // Show success message after registration (e.g. index.html?registered=1&pid=26-12345)
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('registered') === '1') {
+            const box = document.getElementById('registerSuccess');
+            const pid = params.get('pid');
+            box.textContent = 'Account created successfully!' + (pid ? ' Your Patient ID is ' + pid + '.' : '') + ' Please sign in.';
+            box.hidden = false;
+        }
+    </script>
 </body>
 </html>
